@@ -3,7 +3,7 @@ import telebot # для работы с Telegram API
 import random # для генерации случайных чисел
 
 # Создаем объект бота с помощью токена, полученного от @BotFather
-bot = telebot.TeleBot("ВАШ_ТОКЕН")
+bot = telebot.TeleBot("6248475136:AAHhK0K_Bz-o7Pr3hXG0Tm9JKd2ukwK6_Ws")
 
 # Создаем словарь, где ключ - id пользователя, а значение - список из пола и интересов
 users = {}
@@ -56,7 +56,7 @@ def text_message(message):
         data = [x.strip() for x in data]
         # Если первый элемент списка - М или Ж, то сохраняем его как пол пользователя
         if data[0] in ["М", "Ж"]:
-            users[message.chat.id][0] = data[0]
+            users[message.chat.id].append(data[0])
             # Если в списке есть еще элементы, то сохраняем их как интересы пользователя
             if len(data) > 1:
                 users[message.chat.id][1] = data[1:]
@@ -79,6 +79,8 @@ def text_message(message):
     # Иначе если пользователь ввел команду /stop
     elif message.text == "/stop":
         # Удаляем пользователя из словаря users
+        if message.chat.id in users:
+            users.pop(message.chat.id)
         users.pop(message.chat.id)
         # Отправляем сообщение о том, что чат завершен и предлагаем начать заново
         bot.send_message(message.chat.id, "Чат завершен. Если хочешь начать заново, напиши /start.")
@@ -88,4 +90,4 @@ def text_message(message):
         bot.send_message(message.chat.id, "Извини, я не понимаю такие сообщения. Пожалуйста, введи свой пол и интересы через запятую или напиши /chat или /stop.")
 
 # Запускаем бота
-bot.polling()
+bot.polling(none_stop=True)
