@@ -59,7 +59,12 @@ def text_message(message):
             users[message.chat.id].append(data[0])
             # Если в списке есть еще элементы, то сохраняем их как интересы пользователя
             if len(data) > 1:
+                users[message.chat.id] = ["", ""]
+                users[message.chat.id][0] = data[0]
                 users[message.chat.id][1] = data[1:]
+                bot.send_message(message.chat.id, "Спасибо за регистрацию!")
+            else:
+                bot.send_message(message.chat.id, "Пожалуйста, укажите свой пол и интересы.")
             # Отправляем сообщение о том, что данные сохранены и предлагаем найти собеседника
             bot.send_message(message.chat.id, "Спасибо! Я сохранил твои данные. Хочешь найти собеседника? Напиши /chat.")
         # Иначе отправляем сообщение о неверном формате данных и просим повторить ввод
