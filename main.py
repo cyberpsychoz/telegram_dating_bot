@@ -3,7 +3,7 @@ import telebot # для работы с Telegram API
 import random # для генерации случайных чисел
 
 # Создаем объект бота с помощью токена, полученного от @BotFather
-bot = telebot.TeleBot("6248475136:AAHhK0K_Bz-o7Pr3hXG0Tm9JKd2ukwK6_Ws")
+bot = telebot.TeleBot("ВАШ ТОКЕН")
 
 # Создаем словарь, где ключ - id пользователя, а значение - список из пола и интересов
 users = {}
