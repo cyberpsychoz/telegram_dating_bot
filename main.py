@@ -86,7 +86,8 @@ def text_message(message):
         # Удаляем пользователя из словаря users
         if message.chat.id in users:
             users.pop(message.chat.id)
-        users.pop(message.chat.id)
+        if message.chat.id in users:
+            users.pop(message.chat.id)
         # Отправляем сообщение о том, что чат завершен и предлагаем начать заново
         bot.send_message(message.chat.id, "Чат завершен. Если хочешь начать заново, напиши /start.")
     # Иначе если пользователь ввел любой другой текст
